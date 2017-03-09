@@ -88,5 +88,23 @@ def draw_graph():
 	output_file.content_type = 'text/html'
 	output_file.set_contents_from_string(corr2, policy='public-read')
 
+	corr = "all_stock.png"
+	corr3 = "<!DOCTYPE html>\
+            <html>\
+              <body>\
+                <h2>Correlation</h2>\
+                  <img src=http://ec2-54-234-234-93.compute-1.amazonaws.com:8888/files/{0}>\
+                  <img src=http://ec2-54-234-234-93.compute-1.amazonaws.com:8888/files/{1}>\
+                  <img src=http://ec2-54-234-234-93.compute-1.amazonaws.com:8888/files/{2}>\
+              </body>\
+            </html>".format(corr0, corr1, corr2)
+	output_file = website_bucket.new_key('corr3.html')
+	output_file.content_type = 'text/html'
+	output_file.set_contents_from_string(corr3, policy='public-read')
+
 if __name__ == '__main__':
 	draw_graph()
+
+
+#https://s3.amazonaws.com/yahoo-symbol-price/corr1.html
+#https://s3.amazonaws.com/yahoo-symbol-price/corr2.html
