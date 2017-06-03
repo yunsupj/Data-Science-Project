@@ -30,10 +30,10 @@ def future_prediction(data, days):
     data = data[-1]                                                                                #the most recent data use for future prediction
     ft_y_vals = []                                                                                 #the value of future price prediction
     for day in range(days):                            
-        ft_win_data = data.reshape(1, 50, 1)                                                       #reshape data for model input
+        ft_win_data = data.reshape(1, days, 1)                                                       #reshape data for model input
         ft_y_val = TimeSeries_Analysis_YAHOO_API_LSTM.pred_value(model, ft_win_data).tolist()      #prediction values with pred_values function(list)
         ft_y_vals.append(ft_y_val)                                                                 #make list of value of future prices
-        data = data[-49:].reshape(data[-49:].shape[0],)                                            #segment 50days with adding predicted price for next prediction
+        data = data[-(days-1):].reshape(data[-(days-1):].shape[0],)                                            #segment 50days with adding predicted price for next prediction
         data = np.append(data, ft_y_val)                        
         data = np.asarray([((e+1)/(data[0]+1))-1 for e in data])                                   #re-normalize new segmented values(first values is zero)
     ft_y_vals = np.asarray(ft_y_vals)                                                              #make numpy array type from list

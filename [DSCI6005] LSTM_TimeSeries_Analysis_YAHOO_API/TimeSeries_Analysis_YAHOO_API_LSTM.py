@@ -37,7 +37,7 @@ def load_data(symbols, window, shuffle=True, norm_window=True):
     
     win_size = window + 1                             #set window(seq) size
     win_data = []                                     #make empty list for window data
-    for i in range(len(data)-win_size):
+    for i in range(len(data)-win_size+1):
         win_data.append(data[i:i+win_size])
     
     if norm_window:                                   #normalize window data
